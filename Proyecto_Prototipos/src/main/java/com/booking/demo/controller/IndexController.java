@@ -18,6 +18,14 @@ public class IndexController {
 		return "index";
 		
 	}
+
+	@GetMapping("/form")
+	public String formulario(Model modelo)
+	{
+		modelo.addAttribute("titulo", "PMS ERROR 404");
+		return "form";
+
+	}
 	
 	@GetMapping("/Recuperar")
 	public String RecuperarContrasenia(Model modelo)
