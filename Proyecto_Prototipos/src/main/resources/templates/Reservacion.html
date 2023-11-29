@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title th:text="${title}"></title>
+		<link rel="stylesheet"th:href="@{/CSS/bootstrap.min.css}">
+	</head>
+	<body>
+		<h1 th:text="${titulo}" style="text-align: center;"></h1>
+		
+		<div class="container" style="display: flex; align-items: center; padding: 100px;">
+			<img th:src="@{/IMG/Logo.jpg}" style="width: 450px;">
+			<div>
+				<p>Nombre usuario</p>
+			<br><p>Apellido Usuario</p>
+			<label> Fecha de inicio</label>
+			
+			
+			<br><input type="date" class="form-control">
+			<label>Fecha finalizacion</label>
+			<input type="date" class="form-control">
+			<label>Tipo de reservacion</label>
+			<input type="date" class="form-control">
+			<br><label>Departamento</label>
+				<label>Ciudad</label>
+				<label>Hotel</label>
+				<br><select>
+					<option>Departamento 1</option>
+					<option>Departamento 2</option>
+				</select>
+				<select>
+					<option>Ciudad 1</option>
+					<option>Ciudad 2</option>
+				</select>
+				<select>
+					<option>Hotel 1</option>
+					<option>Hotel 2</option>
+				</select>
+			
+			</div>
+		</div>
+		<script th:src="@{/JS/bootstrap.bundle.min.js}"></script>
+	</body>
+</html>
