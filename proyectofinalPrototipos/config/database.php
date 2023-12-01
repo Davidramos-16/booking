@@ -1,0 +1,119 @@
+<?php
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
+header("Access-Control-Allow-Headers: Content-Type");
+header("Access-Control-Allow-Credentials: true");
+header("Access-Control-Allow-Headers: application/json");
+define('host','bdatmpln0.cqbzkt2cy0bh.us-east-2.rds.amazonaws.com');
+    define('username','root');
+    define('password','T6YryIePaRUcSfIHg5Tp');
+    define('database','booking');
+
+class database{
+
+    private $pdo;
+
+
+    public function __construct()
+    {
+        try {
+            $this->pdo = new PDO(
+                "mysql:host=".host.";dbname=".database,username,password
+            );
+            // Configuración adicional de PDO
+            $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        } catch (PDOException $e) {
+            die("Error de conexión a la base de datos: " . $e->getMessage());
+        }
+    }
+    
+
+
+    public function cerrar()
+    {
+        if($this->pdo != null)
+        {
+            $this->pdo = null;
+            echo "Conexion cerrada con exito";
+        }
+        else
+        {
+            echo "No se encuentra inicializada una conexion a base de datos";
+        }
+    }
+
+    
+
+    
+
+    public function registrarReserva($nombre, $apellido, $hotel, $ubicacion,$fentrada,$fsalida)
+    {
+        $query = "insert into detalle_reserva(nombre,apellido,hotel,ubicacion,f_entrada,f_Salida) values($nombre,$apellido,$hotel,$ubicacion,$fentrada,$fsalida)";
+        try
+        {
+            $statement = $this->pdo->prepare($query);
+            $statement->execute();
+        }
+        catch (PDOException $e) {
+            die("Error en la consulta: " . $e->getMessage());
+        }
+    }
+
+    public function mostrarProductos($query)
+    {
+        try {
+            $statement = $this->pdo->prepare($query);
+            $statement->execute();
+
+            // Obtener los resultados en un arreglo asociativo
+            $resultados = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $resultados;
+        } catch (PDOException $e) {
+            die("Error en la consulta: " . $e->getMessage());
+        }
+    }
+
+    public function actualizarUsuario($query)
+    {
+        try {
+            $statement = $this->pdo->prepare($query);
+            $statement->execute();
+
+            
+        } catch (PDOException $e) {
+            die("Error al actualizar: " . $e->getMessage());
+        }
+    }
+
+    public function mostrarCompras($query)
+    {
+        try {
+            $statement = $this->pdo->prepare($query);
+            $statement->execute();
+
+            $resultados = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $resultados;
+
+            
+        } catch (PDOException $e) {
+            die("Error al consultar: " . $e->getMessage());
+        }
+    }
+
+    public function saveCompras($query)
+    {
+        try {
+            $statement = $this->pdo->prepare($query);
+            $statement->execute();
+
+            
+        } catch (PDOException $e) {
+            die("Error al insertar: " . $e->getMessage());
+        }
+    }
+
+    
+   
+
+}
+?>
